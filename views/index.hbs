@@ -5,23 +5,16 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/search" method="GET">
-      <label>
-        City
-        <input type="text" name="city" />
-      </label>
+    {{! <form action="/user-data" method="GET">
+      <label for="first-name-input">First Name:</label>
+      <input id="first-name-input" type="text" name="firstName" />
+      <button type="submit">Save name</button>
+    </form> }}
+    <form action="/user-data" method="POST">
+      <label for="first-name-input">First Name:</label>
+      <input id="first-name-input" type="text" name="firstName" />
 
-      <label>
-        Start-Date
-        <input type="date" name="start-date" />
-      </label>
-
-      <label>
-        End-Date
-        <input type="date" name="end-date" />
-      </label>
-
-      <button type="submit">SEARCH</button>
+      <button type="submit">Save name</button>
     </form>
   </body>
 </html>

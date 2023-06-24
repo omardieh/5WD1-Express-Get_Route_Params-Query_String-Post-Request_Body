@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const hbs = require("hbs");
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
@@ -11,19 +13,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// dynamic route
-app.get("/users/:username", (req, res) => {
-  res.send(req.params);
+// app.get("/user-data", (req, res) => {
+//   console.log(req.query);
+//   res.send(req.query);
+// });
+
+app.post("/user-data", (req, res) => {
+  res.send(req.body);
 });
 
-// nested dynamic routes
-app.get("/users/:username/books/:bookID", (req, res) => {
-  res.send(req.params);
-});
-
-// Query String
-app.get("/search", (req, res, next) => {
-  res.send(req.query);
+app.get("/login", (req, res) => res.render("login"));
+app.post("/login", (req, res) => {
+  res.send(req.body);
 });
 
 app.listen(3000, () => console.log("App listening on port 3000!"));
