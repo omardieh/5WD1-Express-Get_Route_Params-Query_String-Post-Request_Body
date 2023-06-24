@@ -8,6 +8,7 @@ app.set("view engine", "hbs");
 app.get("/", (req, res) => {
   // console.log(req);
   // Examples of the "req" methods in the README.md file
+  res.render("index");
 });
 
 // dynamic route
