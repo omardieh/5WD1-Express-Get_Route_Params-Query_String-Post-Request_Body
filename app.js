@@ -14,6 +14,7 @@ function activityLogger(req, res, next) {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 }
+
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
@@ -36,15 +37,34 @@ const validateRequest = [
     next();
   },
 ];
+
 app.post("/register", validateRequest, (req, res) => {
   res.send("Process valid registration request");
 });
 
-// # last Handling Nonexistent Routes
+// trigger error route :
+app.get("/trigger-error", (req, res, next) => {
+  try {
+    // Attempt to access an undefined variable, which will throw an error
+    const undefinedVariable = someUndefinedVariable;
+    res.send("This will never be executed");
+  } catch (error) {
+    // Pass the error to the error handler middleware
+    next(error);
+  }
+});
+
+// # handle controlled forwarded Errors
 const errorHandlerMiddleware = (err, req, res, next) => {
   console.error(err);
   res.status(500).send("Internal Server Error");
 };
 app.use(errorHandlerMiddleware);
+
+// # last Handling Nonexistent Routes
+const handleNonExistingRoute = (req, res) => {
+  res.status(404).send("Page not found");
+};
+app.use(handleNonExistingRoute);
 
 app.listen(3000, () => console.log("App listening on port 3000!"));
