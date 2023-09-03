@@ -61,7 +61,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 };
 app.use(errorHandlerMiddleware);
 
-// # last Handling Nonexistent Routes
+// # Handling Nonexistent Routes
 const handleNonExistingRoute = (req, res) => {
   res.status(404).send("Page not found");
 };
